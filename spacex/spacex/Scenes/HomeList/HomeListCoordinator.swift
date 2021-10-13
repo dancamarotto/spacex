@@ -22,7 +22,10 @@ class HomeListCoordinator {
 
 extension HomeListCoordinator: Coordinator {
     func start() {
-        let service = HomeListService(network: Network())
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let network = Network(decoder: decoder)
+        let service = HomeListService(network: network)
         let viewModel = HomeListViewModel(coordinator: self, service: service)
         let view = HomeListViewController(viewModel: viewModel)
         viewModel.delegate = view

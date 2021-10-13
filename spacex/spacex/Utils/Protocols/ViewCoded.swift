@@ -27,4 +27,8 @@ extension ViewCoded {
         addConstraints()
         setupViews()
     }
+    
+    func setupViews() {
+        // No need for implementation
+    }
 }

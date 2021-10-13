@@ -10,13 +10,15 @@ import UIKit
 protocol HomeListViewControllerDelegate: AnyObject {
     func startLoading()
     func stopLoading()
+    
+    func updateData()
 }
 
 class HomeListViewController: UIViewController {
     
     private let viewModel: HomeListViewModelProtocol
     
-    private lazy var topAlbumsView: HomeListView = {
+    private lazy var homeListView: HomeListView = {
         HomeListView(delegate: self)
     }()
     
@@ -31,19 +33,36 @@ class HomeListViewController: UIViewController {
     }
     
     override func loadView() {
-        view = topAlbumsView
+        view = homeListView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchData()
     }
     
 }
 
 extension HomeListViewController: HomeListViewControllerDelegate {
-    
+    func updateData() {
+        homeListView.reloadData()
+    }
 }
 
 extension HomeListViewController: HomeListViewDelegate {
+    func numberOfRows(in section: Int) -> Int {
+        viewModel.numberOfRows(in: section)
+    }
     
+    func titleForHeader(in section: Int) -> String {
+        viewModel.titleForHeader(in: section)
+    }
+    
+    func getCompanyInfoCellModel() -> CompanyInfoCellModel? {
+        viewModel.getCompanyInfoCellModel()
+    }
+    
+    func getLaunchCellModel(at index: Int) -> LaunchCellModel {
+        viewModel.getLaunchCellModel(at: index)
+    }
 }
