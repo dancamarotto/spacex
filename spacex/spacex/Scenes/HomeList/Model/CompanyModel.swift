@@ -14,7 +14,7 @@ struct CompanyModel {
     let foundationYear: Int
     let employees: Int
     let launchSites: Int
-    let valuation: Decimal
+    let valuation: Double
     
     init(_ data: CompanyData) {
         name = data.name
@@ -26,22 +26,7 @@ struct CompanyModel {
     }
     
     var valuationCurrency: String {
-        valuation.withCommas() ?? "-"
+        valuation.dollars ?? "-"
     }
     
-}
-
-extension Decimal {
-    var dollars: String? {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "en_US")
-        formatter.numberStyle = .currency
-        return formatter.string(from: self as NSNumber)
-    }
-    
-    func withCommas() -> String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(from: self as NSNumber)
-    }
 }

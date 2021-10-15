@@ -54,6 +54,13 @@ class HomeListLaunchCell: UITableViewCell {
         return label
     }()
     
+    private lazy var separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViewCode()
@@ -92,11 +99,12 @@ extension HomeListLaunchCell: ViewCoded {
         addSubview(rocketLabel)
         addSubview(daysLaunchLabel)
         addSubview(launchSuccessLabel)
+        addSubview(separatorView)
     }
     
     func addConstraints() {
         addConstraints([
-            missionImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            missionImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             missionImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             missionImageView.heightAnchor.constraint(equalToConstant: 30),
             missionImageView.widthAnchor.constraint(equalToConstant: 30),
@@ -112,10 +120,16 @@ extension HomeListLaunchCell: ViewCoded {
             
             daysLaunchLabel.topAnchor.constraint(equalTo: rocketLabel.bottomAnchor),
             daysLaunchLabel.leadingAnchor.constraint(equalTo: missionImageView.trailingAnchor, constant: 5),
-            daysLaunchLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+//            daysLaunchLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             
-            launchSuccessLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            launchSuccessLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            launchSuccessLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            launchSuccessLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            
+            separatorView.topAnchor.constraint(equalTo: daysLaunchLabel.bottomAnchor, constant: 10),
+            separatorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            separatorView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 struct LaunchData: Decodable {
     let flightNumber: Int
     let missionName: String
-    let launchDateUTC: String
+    let launchDateUTC: Date
     let rocket: LaunchRocketData
     let links: LaunchLinksData
     let launchSuccess: Bool?
