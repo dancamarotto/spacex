@@ -13,7 +13,7 @@ struct CompanyData: Decodable {
     let foundationYear: Int
     let employees: Int
     let launchSites: Int
-    let valuation: Decimal
+    let valuation: Double
     
     enum CodingKeys: String, CodingKey {
         case name, founder, employees, launchSites, valuation

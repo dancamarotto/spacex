@@ -7,8 +7,18 @@
 
 import UIKit
 
+extension DateFormatter {
+    static let iso8601Full: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+      }()
+}
+
 protocol TopAlbumsCoordinatorProtocol: AnyObject {
-//    func goToAlbumDetails(withID id: String)
 }
 
 class HomeListCoordinator {
@@ -24,6 +34,7 @@ extension HomeListCoordinator: Coordinator {
     func start() {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
         let network = Network(decoder: decoder)
         let service = HomeListService(network: network)
         let viewModel = HomeListViewModel(coordinator: self, service: service)
