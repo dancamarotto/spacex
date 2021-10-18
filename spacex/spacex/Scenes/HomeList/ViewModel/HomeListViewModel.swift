@@ -16,12 +16,7 @@ protocol HomeListViewModelProtocol: AnyObject {
     func titleForHeader(in section: Int) -> String
     func getCompanyInfoCellModel() -> CompanyInfoCellModel?
     func getLaunchCellModel(at index: Int) -> LaunchCellModel
-}
-
-struct TopAlbumModel {
-    let id: String
-    let name: String
-    let image: String
+    func didSelectLaunch(option: LaunchOption, at index: Int)
 }
 
 class HomeListViewModel {
@@ -95,5 +90,15 @@ extension HomeListViewModel: HomeListViewModelProtocol {
     
     func getLaunchCellModel(at index: Int) -> LaunchCellModel {
         LaunchCellModel(launches[index])
+    }
+    
+    func didSelectLaunch(option: LaunchOption, at index: Int) {
+        guard let link = launches[index].getOptionUrl(for: option),
+              let url = URL(string: link) else {
+            let error = "Invalid, please select another option"
+            delegate?.showError(withMessage: error)
+            return
+        }
+        coordinator?.open(url)
     }
 }

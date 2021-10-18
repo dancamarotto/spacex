@@ -15,6 +15,7 @@
 		810C1AEE2719BF35007B9EDE /* RocketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810C1AED2719BF35007B9EDE /* RocketModel.swift */; };
 		810C1AF02719CB13007B9EDE /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810C1AEF2719CB13007B9EDE /* Date+Extension.swift */; };
 		810C1AF22719CCCC007B9EDE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810C1AF12719CCCC007B9EDE /* Double+Extension.swift */; };
+		81231CEC271E0EB100B38832 /* LaunchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81231CEB271E0EB100B38832 /* LaunchOption.swift */; };
 		81B16C0F27149C7B000EB034 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B16C0E27149C7B000EB034 /* AppDelegate.swift */; };
 		81B16C1827149C7D000EB034 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81B16C1727149C7D000EB034 /* Assets.xcassets */; };
 		81B16C1B27149C7D000EB034 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81B16C1927149C7D000EB034 /* LaunchScreen.storyboard */; };
@@ -71,6 +72,7 @@
 		810C1AED2719BF35007B9EDE /* RocketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketModel.swift; sourceTree = "<group>"; };
 		810C1AEF2719CB13007B9EDE /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		810C1AF12719CCCC007B9EDE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		81231CEB271E0EB100B38832 /* LaunchOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchOption.swift; sourceTree = "<group>"; };
 		81B16C0B27149C7B000EB034 /* spacex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spacex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81B16C0E27149C7B000EB034 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81B16C1727149C7D000EB034 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				810C1AED2719BF35007B9EDE /* RocketModel.swift */,
 				810C1AE227164819007B9EDE /* CompanyInfoCellModel.swift */,
 				810C1AE92716ED5C007B9EDE /* LaunchCellModel.swift */,
+				81231CEB271E0EB100B38832 /* LaunchOption.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				81B16C4927149DCD000EB034 /* MainCoordinator.swift in Sources */,
 				810C1AF22719CCCC007B9EDE /* Double+Extension.swift in Sources */,
 				81B16C6E2714A694000EB034 /* UIViewController+Loading.swift in Sources */,
+				81231CEC271E0EB100B38832 /* LaunchOption.swift in Sources */,
 				81B16C7C2715BA11000EB034 /* UIFont+Extension.swift in Sources */,
 				81B16C672714A2AC000EB034 /* HomeListViewModel.swift in Sources */,
 				81B16C622714A22A000EB034 /* HomeListViewController.swift in Sources */,

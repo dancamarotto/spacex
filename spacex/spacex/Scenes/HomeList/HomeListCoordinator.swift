@@ -19,6 +19,7 @@ extension DateFormatter {
 }
 
 protocol TopAlbumsCoordinatorProtocol: AnyObject {
+    func open(_ url: URL)
 }
 
 class HomeListCoordinator {
@@ -45,9 +46,7 @@ extension HomeListCoordinator: Coordinator {
 }
 
 extension HomeListCoordinator: TopAlbumsCoordinatorProtocol {
-//    func goToAlbumDetails(withID id: String) {
-//        let coordinator = AlbumDetailsCoordinator(navigationController: navigationController, albumID: id)
-//        childCoordinators.append(coordinator)
-//        coordinator.start()
-//    }
+    func open(_ url: URL) {
+        UIApplication.shared.open(url)
+    }
 }

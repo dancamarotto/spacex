@@ -10,8 +10,8 @@ import UIKit
 protocol HomeListViewControllerDelegate: AnyObject {
     func startLoading()
     func stopLoading()
-    
     func updateData()
+    func showError(withMessage message: String)
 }
 
 class HomeListViewController: UIViewController {
@@ -47,6 +47,10 @@ extension HomeListViewController: HomeListViewControllerDelegate {
     func updateData() {
         homeListView.reloadData()
     }
+    
+    func showError(withMessage message: String) {
+        showDefaultError(withMessage: message)
+    }
 }
 
 extension HomeListViewController: HomeListViewDelegate {
@@ -64,5 +68,23 @@ extension HomeListViewController: HomeListViewDelegate {
     
     func getLaunchCellModel(at index: Int) -> LaunchCellModel {
         viewModel.getLaunchCellModel(at: index)
+    }
+    
+    func didSelectLaunch(at index: Int) {
+        let title = "What do you want to see?"
+        let message = "Select the option to learn more about this launch."
+        let actionSheet = UIAlertController(title: title,
+                                            message: message, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Article", style: .default, handler: { _ in
+            self.viewModel.didSelectLaunch(option: .article, at: index)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Wikipedia", style: .default, handler: { _ in
+            self.viewModel.didSelectLaunch(option: .wikipedia, at: index)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Video Page", style: .default, handler: { _ in
+            self.viewModel.didSelectLaunch(option: .video, at: index)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(actionSheet, animated: true)
     }
 }

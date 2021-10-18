@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol HomeListViewDelegate: AnyObject {
     func numberOfRows(in section: Int) -> Int
     func titleForHeader(in section: Int) -> String
     func getCompanyInfoCellModel() -> CompanyInfoCellModel?
     func getLaunchCellModel(at index: Int) -> LaunchCellModel
+    func didSelectLaunch(at index: Int)
 }
 
 class HomeListView: UIView {
@@ -99,7 +101,9 @@ extension HomeListView: UITableViewDataSource {
 
 extension HomeListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard indexPath.section == 1 else { return }
+        delegate?.didSelectLaunch(at: indexPath.row)
     }
 }
 
