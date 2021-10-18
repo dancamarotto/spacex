@@ -38,9 +38,28 @@ class HomeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let barItem = UIBarButtonItem(title: "filter", style: .plain, target: self,
+                                      action: #selector(filterPressed))
+        navigationItem.rightBarButtonItem = barItem
         viewModel.fetchData()
     }
     
+    @objc
+    private func filterPressed() {
+        let title = "Filter options"
+        let actionSheet = UIAlertController(title: title,
+                                            message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Success launches", style: .default, handler: { _ in
+            self.viewModel.filterLaunches(option: .success)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Failed launches", style: .default, handler: { _ in
+            self.viewModel.filterLaunches(option: .fail)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            self.viewModel.filterLaunches(option: .all)
+        }))
+        present(actionSheet, animated: true)
+    }
 }
 
 extension HomeListViewController: HomeListViewControllerDelegate {

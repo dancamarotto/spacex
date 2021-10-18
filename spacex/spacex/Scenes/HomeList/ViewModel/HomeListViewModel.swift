@@ -17,6 +17,7 @@ protocol HomeListViewModelProtocol: AnyObject {
     func getCompanyInfoCellModel() -> CompanyInfoCellModel?
     func getLaunchCellModel(at index: Int) -> LaunchCellModel
     func didSelectLaunch(option: LaunchOption, at index: Int)
+    func filterLaunches(option: LaunchFilterOptions)
 }
 
 class HomeListViewModel {
@@ -27,6 +28,7 @@ class HomeListViewModel {
     private let disposeBag = DisposeBag()
     
     private var companyModel: CompanyModel?
+    private var filter: [LaunchModel]?
     private var launches: [LaunchModel] = []
     
     init(coordinator: TopAlbumsCoordinatorProtocol, service: HomeListServiceProtocol) {
@@ -49,6 +51,7 @@ extension HomeListViewModel: HomeListViewModelProtocol {
                 for launch in launches {
                     self?.launches.append(LaunchModel(launch))
                 }
+                self?.filter = self?.launches
                 
                 self?.delegate?.stopLoading()
                 self?.delegate?.updateData()
@@ -66,7 +69,7 @@ extension HomeListViewModel: HomeListViewModelProtocol {
         case 0:
             return 1
         case 1:
-            return launches.count
+            return filter?.count ?? 0
         default:
             return 0
         }
@@ -89,16 +92,30 @@ extension HomeListViewModel: HomeListViewModelProtocol {
     }
     
     func getLaunchCellModel(at index: Int) -> LaunchCellModel {
-        LaunchCellModel(launches[index])
+        LaunchCellModel(filter![index])
     }
     
     func didSelectLaunch(option: LaunchOption, at index: Int) {
-        guard let link = launches[index].getOptionUrl(for: option),
+        guard let link = filter?[index].getOptionUrl(for: option),
               let url = URL(string: link) else {
             let error = "Invalid, please select another option"
             delegate?.showError(withMessage: error)
             return
         }
         coordinator?.open(url)
+    }
+    
+    func filterLaunches(option: LaunchFilterOptions) {
+        delegate?.startLoading()
+        switch option {
+        case .all:
+            filter = launches
+        case .success:
+            filter = launches.filter { $0.launchSuccess }
+        case .fail:
+            filter = launches.filter { !$0.launchSuccess }
+        }
+        delegate?.stopLoading()
+        delegate?.updateData()
     }
 }
