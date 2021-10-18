@@ -10,8 +10,8 @@ import UIKit
 protocol HomeListViewControllerDelegate: AnyObject {
     func startLoading()
     func stopLoading()
-    
     func updateData()
+    func showError(withMessage message: String)
 }
 
 class HomeListViewController: UIViewController {
@@ -38,14 +38,37 @@ class HomeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let barItem = UIBarButtonItem(title: "filter", style: .plain, target: self,
+                                      action: #selector(filterPressed))
+        navigationItem.rightBarButtonItem = barItem
         viewModel.fetchData()
     }
     
+    @objc
+    private func filterPressed() {
+        let title = "Filter options"
+        let actionSheet = UIAlertController(title: title,
+                                            message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Success launches", style: .default, handler: { _ in
+            self.viewModel.filterLaunches(option: .success)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Failed launches", style: .default, handler: { _ in
+            self.viewModel.filterLaunches(option: .fail)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            self.viewModel.filterLaunches(option: .all)
+        }))
+        present(actionSheet, animated: true)
+    }
 }
 
 extension HomeListViewController: HomeListViewControllerDelegate {
     func updateData() {
         homeListView.reloadData()
+    }
+    
+    func showError(withMessage message: String) {
+        showDefaultError(withMessage: message)
     }
 }
 
@@ -64,5 +87,23 @@ extension HomeListViewController: HomeListViewDelegate {
     
     func getLaunchCellModel(at index: Int) -> LaunchCellModel {
         viewModel.getLaunchCellModel(at: index)
+    }
+    
+    func didSelectLaunch(at index: Int) {
+        let title = "What do you want to see?"
+        let message = "Select the option to learn more about this launch."
+        let actionSheet = UIAlertController(title: title,
+                                            message: message, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Article", style: .default, handler: { _ in
+            self.viewModel.didSelectLaunch(option: .article, at: index)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Wikipedia", style: .default, handler: { _ in
+            self.viewModel.didSelectLaunch(option: .wikipedia, at: index)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Video Page", style: .default, handler: { _ in
+            self.viewModel.didSelectLaunch(option: .video, at: index)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(actionSheet, animated: true)
     }
 }

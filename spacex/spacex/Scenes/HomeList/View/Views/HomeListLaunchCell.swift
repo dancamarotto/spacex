@@ -120,7 +120,6 @@ extension HomeListLaunchCell: ViewCoded {
             
             daysLaunchLabel.topAnchor.constraint(equalTo: rocketLabel.bottomAnchor),
             daysLaunchLabel.leadingAnchor.constraint(equalTo: missionImageView.trailingAnchor, constant: 5),
-//            daysLaunchLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             
             launchSuccessLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             launchSuccessLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),

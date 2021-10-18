@@ -9,4 +9,7 @@ import Foundation
 
 struct LaunchLinksData: Decodable {
     let missionPatch: String?
+    let articleLink: String?
+    let wikipedia: String?
+    let videoLink: String?
 }
